@@ -123,7 +123,7 @@ const CustomOrderChart = ({ timeRange = "7" }: CustomOrderChartProps) => {
       intersect: false,
       mode: 'index' as const,
     },
-    onClick: (event: any, elements: any) => {
+    onClick: (_event: any, elements: any) => {
       if (elements.length > 0) {
         const firstElement = elements[0];
         const dateIndex = firstElement.index;
