@@ -51,30 +51,6 @@
   flex-wrap: wrap;
 }
 
-// Stats card interactive styles
-.modern-stat-card {
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid var(--gray-200) !important;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-    border-color: var(--primary-color) !important;
-  }
-}
-
-.modern-stat-title {
-  font-weight: 500 !important;
-  color: var(--gray-600) !important;
-}
-
-.modern-stat-value {
-  font-weight: 700 !important;
-  color: var(--gray-900) !important;
-  margin-top: 8px !important;
-}
-
 // Responsive adjustments
 @media (max-width: 768px) {
   .dashboard-controls {

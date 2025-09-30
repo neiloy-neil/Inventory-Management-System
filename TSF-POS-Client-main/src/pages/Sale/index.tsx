@@ -12,12 +12,10 @@ import { addSale } from "../../redux/actions/sale/sale";
 import { toast } from "react-hot-toast";
 import { CLEAR_SALE_MESSAGE } from "../../constants/reduxActionsNames/sale";
 import AlertPopup from "../../components/AlertPopup/AlertPopup";
-import { useNavigate } from "react-router-dom";
 import { CLEAR_CART } from "../../constants/reduxActionsNames/cart";
 import SaleInfo from "../../components/sections/Sale/SaleInfo/SaleInfo";
 
 const Sale = () => {
-  const navigate = useNavigate();
   const { error, message, success, sale } = useSelector(
     (state: StateType) => state.sale
   );
