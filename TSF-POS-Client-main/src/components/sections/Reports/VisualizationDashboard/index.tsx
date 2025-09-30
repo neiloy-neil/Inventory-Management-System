@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { 
   Chart as ChartJS,
   CategoryScale,
@@ -27,12 +27,24 @@ ChartJS.register(
   ArcElement
 );
 
+interface SalesData {
+  name: string;
+  revenue: number;
+  profit: number;
+}
+
+interface InventoryData {
+  name: string;
+  stock: number;
+  sold: number;
+}
+
 const VisualizationDashboard = () => {
   const [selectedChartType, setSelectedChartType] = useState("bar");
   const [selectedData, setSelectedData] = useState("sales");
 
   // Sample data for demonstration
-  const salesData = [
+  const salesData: SalesData[] = [
     { name: "Jan", revenue: 4000, profit: 2400 },
     { name: "Feb", revenue: 3000, profit: 1398 },
     { name: "Mar", revenue: 2000, profit: 9800 },
@@ -41,7 +53,7 @@ const VisualizationDashboard = () => {
     { name: "Jun", revenue: 2390, profit: 3800 },
   ];
 
-  const inventoryData = [
+  const inventoryData: InventoryData[] = [
     { name: "Product A", stock: 400, sold: 240 },
     { name: "Product B", stock: 300, sold: 139 },
     { name: "Product C", stock: 200, sold: 980 },
@@ -60,14 +72,14 @@ const VisualizationDashboard = () => {
       datasets: selectedData === "sales" ? [
         {
           label: 'Revenue',
-          data: data.map(item => item.revenue),
+          data: data.map(item => (item as SalesData).revenue),
           backgroundColor: '#8884d8',
           borderColor: '#8884d8',
           borderWidth: 1,
         },
         {
           label: 'Profit',
-          data: data.map(item => item.profit),
+          data: data.map(item => (item as SalesData).profit),
           backgroundColor: '#82ca9d',
           borderColor: '#82ca9d',
           borderWidth: 1,
@@ -75,14 +87,14 @@ const VisualizationDashboard = () => {
       ] : [
         {
           label: 'Stock',
-          data: data.map(item => item.stock),
+          data: data.map(item => (item as InventoryData).stock),
           backgroundColor: '#8884d8',
           borderColor: '#8884d8',
           borderWidth: 1,
         },
         {
           label: 'Sold',
-          data: data.map(item => item.sold),
+          data: data.map(item => (item as InventoryData).sold),
           backgroundColor: '#82ca9d',
           borderColor: '#82ca9d',
           borderWidth: 1,

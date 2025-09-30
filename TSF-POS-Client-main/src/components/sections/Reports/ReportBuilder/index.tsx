@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { TextField, FormControl, InputLabel, Select, MenuItem, Checkbox, FormControlLabel, Button } from "@mui/material";
 import "./ReportBuilder.scss";
 
@@ -199,7 +199,7 @@ const ReportBuilder = () => {
             variant="contained" 
             color="primary" 
             onClick={generateReport}
-            size="large"
+            disabled={!reportName || !selectedDataSource}
           >
             Generate Report
           </Button>

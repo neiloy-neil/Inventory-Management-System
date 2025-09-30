@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { 
   Chart as ChartJS,
   CategoryScale,
@@ -30,6 +30,19 @@ ChartJS.register(
   Legend
 );
 
+interface TimeData {
+  name: string;
+  period1: number;
+  period2: number;
+}
+
+interface BranchData {
+  name: string;
+  branch1: number;
+  branch2: number;
+
+}
+
 const ComparativeAnalysis = () => {
   const [analysisType, setAnalysisType] = useState("time");
   const [period1, setPeriod1] = useState("2023-01");
@@ -38,13 +51,13 @@ const ComparativeAnalysis = () => {
   const [branch2, setBranch2] = useState("branch2");
 
   // Sample data for demonstration
-  const timeComparisonData = [
+  const timeComparisonData: TimeData[] = [
     { name: "Revenue", period1: 4000, period2: 3000 },
     { name: "Profit", period1: 2400, period2: 1398 },
     { name: "Orders", period1: 240, period2: 130 },
   ];
 
-  const branchComparisonData = [
+  const branchComparisonData: BranchData[] = [
     { name: "Revenue", branch1: 4000, branch2: 3000 },
     { name: "Profit", branch1: 2400, branch2: 1398 },
     { name: "Customers", branch1: 240, branch2: 130 },
@@ -60,12 +73,12 @@ const ComparativeAnalysis = () => {
       datasets: [
         {
           label: label1,
-          data: data.map(item => analysisType === "time" ? item.period1 : item.branch1),
+          data: data.map(item => analysisType === "time" ? (item as TimeData).period1 : (item as BranchData).branch1),
           backgroundColor: '#8884d8',
         },
         {
           label: label2,
-          data: data.map(item => analysisType === "time" ? item.period2 : item.branch2),
+          data: data.map(item => analysisType === "time" ? (item as TimeData).period2 : (item as BranchData).branch2),
           backgroundColor: '#82ca9d',
         }
       ]
@@ -99,7 +112,7 @@ const ComparativeAnalysis = () => {
           color="primary"
           value={analysisType}
           exclusive
-          onChange={(e, newValue) => newValue && setAnalysisType(newValue)}
+          onChange={(_e, newValue) => newValue && setAnalysisType(newValue)}
           aria-label="analysis type"
         >
           <ToggleButton value="time">Time Period Comparison</ToggleButton>
