@@ -51,20 +51,44 @@ export default function Sidebar(props: Props) {
         <img src={logo} alt="Logo" className="modern-sidebar-logo" />
       </div>
       <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.1)" }} />
-      <List className="modern-sidebar-nav">
-        {sidebarLinks.map((link, index) => {
-          if (link.adminOnlyPermission && !isAdmin) return null;
-          return (
-            <ListItem key={index} disablePadding>
+      <div className="modern-sidebar-nav-container">
+        <List className="modern-sidebar-nav">
+          {sidebarLinks.map((link, index) => {
+            if (link.adminOnlyPermission && !isAdmin) return null;
+            return (
+              <ListItem key={index} disablePadding>
+                <ListItemButton 
+                  onClick={() => handleLinkClick(link.link)}
+                  className="modern-sidebar-link"
+                >
+                  <ListItemIcon className="modern-sidebar-icon" sx={{ color: "inherit" }}>
+                    <link.icon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={link.name}
+                    sx={{ 
+                      fontFamily: "Poppins",
+                      color: "inherit",
+                      "& .MuiTypography-root": {
+                        color: "inherit"
+                      }
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+          {!isAdmin && (
+            <ListItem disablePadding>
               <ListItemButton 
-                onClick={() => handleLinkClick(link.link)}
+                onClick={() => navigate(`/branch/${user.branch}`)}
                 className="modern-sidebar-link"
               >
                 <ListItemIcon className="modern-sidebar-icon" sx={{ color: "inherit" }}>
-                  <link.icon />
+                  <StoreMallDirectoryIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary={link.name}
+                  primary={"My Branch"}
                   sx={{ 
                     fontFamily: "Poppins",
                     color: "inherit",
@@ -75,31 +99,9 @@ export default function Sidebar(props: Props) {
                 />
               </ListItemButton>
             </ListItem>
-          );
-        })}
-        {!isAdmin && (
-          <ListItem disablePadding>
-            <ListItemButton 
-              onClick={() => navigate(`/branch/${user.branch}`)}
-              className="modern-sidebar-link"
-            >
-              <ListItemIcon className="modern-sidebar-icon" sx={{ color: "inherit" }}>
-                <StoreMallDirectoryIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary={"My Branch"}
-                sx={{ 
-                  fontFamily: "Poppins",
-                  color: "inherit",
-                  "& .MuiTypography-root": {
-                    color: "inherit"
-                  }
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
-        )}
-      </List>
+          )}
+        </List>
+      </div>
     </div>
   );
 

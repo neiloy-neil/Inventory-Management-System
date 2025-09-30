@@ -1,0 +1,52 @@
+.scheduled-reports-component {
+  padding: 20px;
+}
+
+.scheduled-reports-header h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.scheduled-reports-header p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.scheduled-reports-actions {
+  margin-bottom: 30px;
+}
+
+.scheduled-reports-table {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.schedule-form {
+  padding: 10px 0;
+}
+
+.schedule-info {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #fff8e1;
+  border-radius: 8px;
+  border-left: 4px solid #ffc107;
+}
+
+.schedule-info p {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.schedule-info ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.schedule-info li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.schedule-info strong {
+  color: #e65100;
+}

@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 * {
   margin: unset;
   padding: unset;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 /* Override Bootstrap default margins */
@@ -18,9 +20,123 @@ p {
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: var(--gray-100);
+  color: var(--gray-800);
+  line-height: 1.6;
 }
 
 :root {
-  --font-family: "Montserrat", sans-serif;
+  /* Modern color palette */
+  --primary-color: #4361ee;
+  --primary-dark: #3a56d4;
+  --secondary-color: #7209b7;
+  --accent-color: #4cc9f0;
+  --success-color: #4ade80;
+  --warning-color: #facc15;
+  --danger-color: #f87171;
+  --info-color: #60a5fa;
+  --light-color: #f8f9fa;
+  --dark-color: #1e293b;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+  
+  /* Modern spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* Modern shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Modern transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Modern border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+  
+  /* Modern font sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+}
+
+/* Utility classes */
+.modern-flex {
+  display: flex;
+}
+
+.modern-flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.modern-flex-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modern-gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.modern-gap-md {
+  gap: var(--spacing-md);
+}
+
+.modern-gap-lg {
+  gap: var(--spacing-lg);
+}
+
+.modern-mb-sm {
+  margin-bottom: var(--spacing-sm);
+}
+
+.modern-mb-md {
+  margin-bottom: var(--spacing-md);
+}
+
+.modern-mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
 }

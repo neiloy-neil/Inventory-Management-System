@@ -63,3 +63,35 @@ export interface WarehouseLocation {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface ReturnEntry {
+  _id: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  reason: string;
+  condition: 'excellent' | 'good' | 'fair' | 'poor';
+  warehouseLocation?: string;
+  returnedBy: string;
+  returnDate: Date;
+  status: 'pending' | 'processed' | 'rejected';
+  notes?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface DamageEntry {
+  _id: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  damageType: 'physical' | 'expiry' | 'quality' | 'other';
+  description: string;
+  warehouseLocation?: string;
+  reportedBy: string;
+  reportDate: Date;
+  status: 'reported' | 'verified' | 'resolved';
+  resolution?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}

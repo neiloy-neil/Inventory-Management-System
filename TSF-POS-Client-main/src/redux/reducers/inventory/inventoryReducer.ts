@@ -50,6 +50,30 @@ import {
   DELETE_WAREHOUSE_LOCATION,
   DELETE_WAREHOUSE_LOCATION_SUCCESS,
   DELETE_WAREHOUSE_LOCATION_ERROR,
+  FETCH_RETURN_ENTRIES,
+  FETCH_RETURN_ENTRIES_SUCCESS,
+  FETCH_RETURN_ENTRIES_ERROR,
+  ADD_RETURN_ENTRY,
+  ADD_RETURN_ENTRY_SUCCESS,
+  ADD_RETURN_ENTRY_ERROR,
+  UPDATE_RETURN_ENTRY,
+  UPDATE_RETURN_ENTRY_SUCCESS,
+  UPDATE_RETURN_ENTRY_ERROR,
+  DELETE_RETURN_ENTRY,
+  DELETE_RETURN_ENTRY_SUCCESS,
+  DELETE_RETURN_ENTRY_ERROR,
+  FETCH_DAMAGE_ENTRIES,
+  FETCH_DAMAGE_ENTRIES_SUCCESS,
+  FETCH_DAMAGE_ENTRIES_ERROR,
+  ADD_DAMAGE_ENTRY,
+  ADD_DAMAGE_ENTRY_SUCCESS,
+  ADD_DAMAGE_ENTRY_ERROR,
+  UPDATE_DAMAGE_ENTRY,
+  UPDATE_DAMAGE_ENTRY_SUCCESS,
+  UPDATE_DAMAGE_ENTRY_ERROR,
+  DELETE_DAMAGE_ENTRY,
+  DELETE_DAMAGE_ENTRY_SUCCESS,
+  DELETE_DAMAGE_ENTRY_ERROR,
   CLEAR_INVENTORY_MESSAGE,
 } from "../../../constants/reduxActionsNames/inventory";
 import {
@@ -58,6 +82,8 @@ import {
   InventoryAlert,
   ReorderRequest,
   WarehouseLocation,
+  ReturnEntry,
+  DamageEntry,
 } from "../../../types/Inventory/inventoryTypes";
 
 // Define interfaces for the state
@@ -67,6 +93,8 @@ export interface InventoryState {
   alerts: InventoryAlert[];
   reorderRequests: ReorderRequest[];
   warehouseLocations: WarehouseLocation[];
+  returnEntries: ReturnEntry[];
+  damageEntries: DamageEntry[];
   loading: boolean;
   error: string | null;
   message: string | null;
@@ -79,6 +107,8 @@ const initialState: InventoryState = {
   alerts: [],
   reorderRequests: [],
   warehouseLocations: [],
+  returnEntries: [],
+  damageEntries: [],
   loading: false,
   error: null,
   message: null,
@@ -330,6 +360,120 @@ const inventoryReducer = (state = initialState, action: any): InventoryState => 
     case ADD_WAREHOUSE_LOCATION_ERROR:
     case UPDATE_WAREHOUSE_LOCATION_ERROR:
     case DELETE_WAREHOUSE_LOCATION_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    // Return Entries
+    case FETCH_RETURN_ENTRIES:
+    case ADD_RETURN_ENTRY:
+    case UPDATE_RETURN_ENTRY:
+    case DELETE_RETURN_ENTRY:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        message: null,
+      };
+
+    case FETCH_RETURN_ENTRIES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        returnEntries: action.payload,
+      };
+
+    case ADD_RETURN_ENTRY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        returnEntries: [...state.returnEntries, action.payload],
+        message: "Return entry added successfully",
+      };
+
+    case UPDATE_RETURN_ENTRY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        returnEntries: state.returnEntries.map((entry) =>
+          entry._id === action.payload._id ? action.payload : entry
+        ),
+        message: "Return entry updated successfully",
+      };
+
+    case DELETE_RETURN_ENTRY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        returnEntries: state.returnEntries.filter(
+          (entry) => entry._id !== action.payload
+        ),
+        message: "Return entry deleted successfully",
+      };
+
+    case FETCH_RETURN_ENTRIES_ERROR:
+    case ADD_RETURN_ENTRY_ERROR:
+    case UPDATE_RETURN_ENTRY_ERROR:
+    case DELETE_RETURN_ENTRY_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    // Damage Entries
+    case FETCH_DAMAGE_ENTRIES:
+    case ADD_DAMAGE_ENTRY:
+    case UPDATE_DAMAGE_ENTRY:
+    case DELETE_DAMAGE_ENTRY:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        message: null,
+      };
+
+    case FETCH_DAMAGE_ENTRIES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        damageEntries: action.payload,
+      };
+
+    case ADD_DAMAGE_ENTRY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        damageEntries: [...state.damageEntries, action.payload],
+        message: "Damage entry added successfully",
+      };
+
+    case UPDATE_DAMAGE_ENTRY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        damageEntries: state.damageEntries.map((entry) =>
+          entry._id === action.payload._id ? action.payload : entry
+        ),
+        message: "Damage entry updated successfully",
+      };
+
+    case DELETE_DAMAGE_ENTRY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        damageEntries: state.damageEntries.filter(
+          (entry) => entry._id !== action.payload
+        ),
+        message: "Damage entry deleted successfully",
+      };
+
+    case FETCH_DAMAGE_ENTRIES_ERROR:
+    case ADD_DAMAGE_ENTRY_ERROR:
+    case UPDATE_DAMAGE_ENTRY_ERROR:
+    case DELETE_DAMAGE_ENTRY_ERROR:
       return {
         ...state,
         loading: false,

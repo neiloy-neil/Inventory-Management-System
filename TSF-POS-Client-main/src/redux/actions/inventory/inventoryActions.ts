@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios"; // Not currently used
 import { 
   FETCH_INVENTORY_ITEMS,
   FETCH_INVENTORY_ITEMS_SUCCESS,
@@ -51,6 +51,30 @@ import {
   DELETE_WAREHOUSE_LOCATION,
   DELETE_WAREHOUSE_LOCATION_SUCCESS,
   DELETE_WAREHOUSE_LOCATION_ERROR,
+  FETCH_RETURN_ENTRIES,
+  FETCH_RETURN_ENTRIES_SUCCESS,
+  FETCH_RETURN_ENTRIES_ERROR,
+  ADD_RETURN_ENTRY,
+  ADD_RETURN_ENTRY_SUCCESS,
+  ADD_RETURN_ENTRY_ERROR,
+  UPDATE_RETURN_ENTRY,
+  UPDATE_RETURN_ENTRY_SUCCESS,
+  UPDATE_RETURN_ENTRY_ERROR,
+  DELETE_RETURN_ENTRY,
+  DELETE_RETURN_ENTRY_SUCCESS,
+  DELETE_RETURN_ENTRY_ERROR,
+  FETCH_DAMAGE_ENTRIES,
+  FETCH_DAMAGE_ENTRIES_SUCCESS,
+  FETCH_DAMAGE_ENTRIES_ERROR,
+  ADD_DAMAGE_ENTRY,
+  ADD_DAMAGE_ENTRY_SUCCESS,
+  ADD_DAMAGE_ENTRY_ERROR,
+  UPDATE_DAMAGE_ENTRY,
+  UPDATE_DAMAGE_ENTRY_SUCCESS,
+  UPDATE_DAMAGE_ENTRY_ERROR,
+  DELETE_DAMAGE_ENTRY,
+  DELETE_DAMAGE_ENTRY_SUCCESS,
+  DELETE_DAMAGE_ENTRY_ERROR,
   CLEAR_INVENTORY_MESSAGE,
 } from "../../../constants/reduxActionsNames/inventory";
 
@@ -61,6 +85,8 @@ import {
   InventoryAlert,
   ReorderRequest,
   WarehouseLocation,
+  ReturnEntry,
+  DamageEntry,
 } from "../../../types/Inventory/inventoryTypes";
 
 // Action creators
@@ -584,6 +610,260 @@ export const deleteWarehouseLocation = (id: string) => async (dispatch: any) => 
     dispatch({
       type: DELETE_WAREHOUSE_LOCATION_ERROR,
       payload: error.message || "Failed to delete warehouse location",
+    });
+    
+    return Promise.reject(error);
+  }
+};
+
+// Return Entry Actions
+export const fetchReturnEntries = () => async (dispatch: any) => {
+  try {
+    dispatch({ type: FETCH_RETURN_ENTRIES });
+    
+    // Mock data for now - replace with actual API call
+    const mockData: ReturnEntry[] = [
+      {
+        _id: "return1",
+        productId: "product1",
+        productName: "Office Chair",
+        quantity: 2,
+        reason: "Customer changed mind",
+        condition: "good",
+        warehouseLocation: "WH-01",
+        returnedBy: "customer123",
+        returnDate: new Date(),
+        status: "pending",
+        notes: "Package unopened",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        _id: "return2",
+        productId: "product2",
+        productName: "Wooden Desk",
+        quantity: 1,
+        reason: "Damaged during shipping",
+        condition: "fair",
+        warehouseLocation: "WH-02",
+        returnedBy: "customer456",
+        returnDate: new Date(),
+        status: "processed",
+        notes: "Minor scratches on surface",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
+    ];
+    
+    dispatch({
+      type: FETCH_RETURN_ENTRIES_SUCCESS,
+      payload: mockData,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: FETCH_RETURN_ENTRIES_ERROR,
+      payload: error.message || "Failed to fetch return entries",
+    });
+  }
+};
+
+export const addReturnEntry = (entry: Omit<ReturnEntry, "_id" | "createdAt" | "updatedAt">) => async (dispatch: any) => {
+  try {
+    dispatch({ type: ADD_RETURN_ENTRY });
+    
+    // Mock response - replace with actual API call
+    const newEntry: ReturnEntry = {
+      ...entry,
+      _id: Math.random().toString(36).substr(2, 9),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    
+    dispatch({
+      type: ADD_RETURN_ENTRY_SUCCESS,
+      payload: newEntry,
+    });
+    
+    return Promise.resolve(newEntry);
+  } catch (error: any) {
+    dispatch({
+      type: ADD_RETURN_ENTRY_ERROR,
+      payload: error.message || "Failed to add return entry",
+    });
+    
+    return Promise.reject(error);
+  }
+};
+
+export const updateReturnEntry = (id: string, entry: Partial<ReturnEntry>) => async (dispatch: any) => {
+  try {
+    dispatch({ type: UPDATE_RETURN_ENTRY });
+    
+    // Mock response - replace with actual API call
+    const updatedEntry: ReturnEntry = {
+      ...(entry as ReturnEntry),
+      _id: id,
+      updatedAt: new Date(),
+    };
+    
+    dispatch({
+      type: UPDATE_RETURN_ENTRY_SUCCESS,
+      payload: updatedEntry,
+    });
+    
+    return Promise.resolve(updatedEntry);
+  } catch (error: any) {
+    dispatch({
+      type: UPDATE_RETURN_ENTRY_ERROR,
+      payload: error.message || "Failed to update return entry",
+    });
+    
+    return Promise.reject(error);
+  }
+};
+
+export const deleteReturnEntry = (id: string) => async (dispatch: any) => {
+  try {
+    dispatch({ type: DELETE_RETURN_ENTRY });
+    
+    // Mock response - replace with actual API call
+    dispatch({
+      type: DELETE_RETURN_ENTRY_SUCCESS,
+      payload: id,
+    });
+    
+    return Promise.resolve();
+  } catch (error: any) {
+    dispatch({
+      type: DELETE_RETURN_ENTRY_ERROR,
+      payload: error.message || "Failed to delete return entry",
+    });
+    
+    return Promise.reject(error);
+  }
+};
+
+// Damage Entry Actions
+export const fetchDamageEntries = () => async (dispatch: any) => {
+  try {
+    dispatch({ type: FETCH_DAMAGE_ENTRIES });
+    
+    // Mock data for now - replace with actual API call
+    const mockData: DamageEntry[] = [
+      {
+        _id: "damage1",
+        productId: "product1",
+        productName: "Office Chair",
+        quantity: 1,
+        damageType: "physical",
+        description: "Broken leg during handling",
+        warehouseLocation: "WH-01",
+        reportedBy: "warehouse123",
+        reportDate: new Date(),
+        status: "reported",
+        resolution: "Pending review",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        _id: "damage2",
+        productId: "product2",
+        productName: "Wooden Desk",
+        quantity: 2,
+        damageType: "quality",
+        description: "Finish peeling off",
+        warehouseLocation: "WH-02",
+        reportedBy: "quality123",
+        reportDate: new Date(),
+        status: "verified",
+        resolution: "Items quarantined",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
+    ];
+    
+    dispatch({
+      type: FETCH_DAMAGE_ENTRIES_SUCCESS,
+      payload: mockData,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: FETCH_DAMAGE_ENTRIES_ERROR,
+      payload: error.message || "Failed to fetch damage entries",
+    });
+  }
+};
+
+export const addDamageEntry = (entry: Omit<DamageEntry, "_id" | "createdAt" | "updatedAt">) => async (dispatch: any) => {
+  try {
+    dispatch({ type: ADD_DAMAGE_ENTRY });
+    
+    // Mock response - replace with actual API call
+    const newEntry: DamageEntry = {
+      ...entry,
+      _id: Math.random().toString(36).substr(2, 9),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    
+    dispatch({
+      type: ADD_DAMAGE_ENTRY_SUCCESS,
+      payload: newEntry,
+    });
+    
+    return Promise.resolve(newEntry);
+  } catch (error: any) {
+    dispatch({
+      type: ADD_DAMAGE_ENTRY_ERROR,
+      payload: error.message || "Failed to add damage entry",
+    });
+    
+    return Promise.reject(error);
+  }
+};
+
+export const updateDamageEntry = (id: string, entry: Partial<DamageEntry>) => async (dispatch: any) => {
+  try {
+    dispatch({ type: UPDATE_DAMAGE_ENTRY });
+    
+    // Mock response - replace with actual API call
+    const updatedEntry: DamageEntry = {
+      ...(entry as DamageEntry),
+      _id: id,
+      updatedAt: new Date(),
+    };
+    
+    dispatch({
+      type: UPDATE_DAMAGE_ENTRY_SUCCESS,
+      payload: updatedEntry,
+    });
+    
+    return Promise.resolve(updatedEntry);
+  } catch (error: any) {
+    dispatch({
+      type: UPDATE_DAMAGE_ENTRY_ERROR,
+      payload: error.message || "Failed to update damage entry",
+    });
+    
+    return Promise.reject(error);
+  }
+};
+
+export const deleteDamageEntry = (id: string) => async (dispatch: any) => {
+  try {
+    dispatch({ type: DELETE_DAMAGE_ENTRY });
+    
+    // Mock response - replace with actual API call
+    dispatch({
+      type: DELETE_DAMAGE_ENTRY_SUCCESS,
+      payload: id,
+    });
+    
+    return Promise.resolve();
+  } catch (error: any) {
+    dispatch({
+      type: DELETE_DAMAGE_ENTRY_ERROR,
+      payload: error.message || "Failed to delete damage entry",
     });
     
     return Promise.reject(error);

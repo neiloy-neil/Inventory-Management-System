@@ -1,0 +1,20 @@
+// Dashboard Amount Styles
+.dashboard-amount {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+  .dashboard-amount {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-amount {
+    grid-template-columns: 1fr;
+  }
+}

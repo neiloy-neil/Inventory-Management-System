@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 
 const InventoryAlerts: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { alerts, loading } = useSelector((state: StateType) => state.inventory);
+  const { alerts } = useSelector((state: StateType) => state.inventory);
+  // const { alerts, loading } = useSelector((state: StateType) => state.inventory); // Commented out unused loading variable
 
   useEffect(() => {
     dispatch(fetchInventoryAlerts());

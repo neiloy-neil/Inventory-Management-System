@@ -10,6 +10,7 @@ import "./productList.scss";
 import EditProduct from "../EditProduct/EditProduct";
 import ProductListView from "../ProductListView/ProductListView";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
+import Button from "../../../core/Button/Button";
 
 const ProductList = ({ products }: { products: Product[] }) => {
   const { loading } = useSelector((state: StateType) => state.product);
@@ -29,20 +30,26 @@ const ProductList = ({ products }: { products: Product[] }) => {
   };
 
   return (
-    <div>
-      <AddProduct />
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setListView(event.target.checked);
-              }}
+    <div className="product-list-container">
+      <div className="product-list-header">
+        <h1 className="product-list-title">Product Management</h1>
+        <div className="view-toggle">
+          <AddProduct />
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    setListView(event.target.checked);
+                  }}
+                />
+              }
+              label="List View"
             />
-          }
-          label="List View"
-        />
-      </FormGroup>
+          </FormGroup>
+        </div>
+      </div>
+      
       <DeleteProduct
         deletingProductModal={deletingProductModal}
         loading={loading}
@@ -54,8 +61,13 @@ const ProductList = ({ products }: { products: Product[] }) => {
         setOpen={setEditingModelOpen}
         editingProduct={editingProduct}
       />
+      
       {listView ? (
-        <ProductListView products={products} />
+        <div className="modern-card modern-mb-lg">
+          <div className="modern-card-body">
+            <ProductListView products={products} />
+          </div>
+        </div>
       ) : (
         <div className="product__list">
           {products?.map((product, index) => {

@@ -27,19 +27,24 @@ ChartJS.register(
   Legend
 );
 
-const SaleChart = () => {
+interface SaleChartProps {
+  timeRange?: string;
+}
+
+const SaleChart = ({ timeRange = "7" }: SaleChartProps) => {
   const [sales, setSales] = useState<Sale[]>([]);
   const { branch } = useSelector((state: StateType) => state.dashboard);
 
   const fetchSales = useCallback(async () => {
-    const sevenDaysBefore = dayjs().subtract(6, "days").format("MM-DD-YYYY");
-    const today = dayjs().subtract(0, "days").format("MM-DD-YYYY");
+    const days = parseInt(timeRange);
+    const startDate = dayjs().subtract(days - 1, "days").format("MM-DD-YYYY");
+    const endDate = dayjs().subtract(0, "days").format("MM-DD-YYYY");
 
     const { data } = await client.get(
-      `/sale/all/list?startDate=${sevenDaysBefore}&endDate=${today}&branch=${branch}`
+      `/sale/all/list?startDate=${startDate}&endDate=${endDate}&branch=${branch}`
     );
     setSales(data.allSales);
-  }, [branch]);
+  }, [branch, timeRange]);
 
   useEffect(() => {
     fetchSales();
@@ -60,12 +65,31 @@ const SaleChart = () => {
       },
       title: {
         display: true,
-        text: "Sales Performance (Last 7 Days)",
+        text: `Sales Performance (Last ${timeRange} Days)`,
         font: {
           size: 18,
           weight: "bold" as const,
         },
         padding: 20,
+      },
+      tooltip: {
+        mode: 'index' as const,
+        intersect: false,
+        callbacks: {
+          label: function(context: any) {
+            let label = context.dataset.label || '';
+            if (label) {
+              label += ': ';
+            }
+            if (context.parsed.y !== null) {
+              label += new Intl.NumberFormat('en-BD', {
+                style: 'currency',
+                currency: 'BDT'
+              }).format(context.parsed.y);
+            }
+            return label;
+          }
+        }
       },
     },
     scales: {
@@ -97,18 +121,34 @@ const SaleChart = () => {
       intersect: false,
       mode: 'index' as const,
     },
+    onClick: (event: any, elements: any) => {
+      if (elements.length > 0) {
+        const firstElement = elements[0];
+        const dateIndex = firstElement.index;
+        // Could implement navigation to sales for specific date
+        console.log("Clicked on date index:", dateIndex);
+      }
+    },
   };
 
-  const lastSevenDays = [];
-  const dayNameLabels = [];
+  // Calculate date range based on timeRange
+  const days = parseInt(timeRange);
+  const lastDays = [];
+  const dayLabels = [];
 
-  for (let i = 7; i >= 0; i--) {
-    lastSevenDays.push({ date: moment().subtract(i, "days"), amount: 0 });
-    dayNameLabels.push(moment().subtract(i, "days").format("dddd"));
+  for (let i = days - 1; i >= 0; i--) {
+    lastDays.push({ date: moment().subtract(i, "days"), amount: 0 });
+    if (days <= 7) {
+      dayLabels.push(moment().subtract(i, "days").format("dddd"));
+    } else if (days <= 30) {
+      dayLabels.push(moment().subtract(i, "days").format("MMM DD"));
+    } else {
+      dayLabels.push(moment().subtract(i, "days").format("MMM DD"));
+    }
   }
 
-  // here iterating last 7days
-  lastSevenDays.forEach((day) => {
+  // here iterating last days
+  lastDays.forEach((day) => {
     // here iterating every sales
     sales?.forEach((sale) => {
       // checking if there is any 2ndpartialAmountPaid today
@@ -137,11 +177,11 @@ const SaleChart = () => {
   });
 
   const data = {
-    labels: dayNameLabels,
+    labels: dayLabels,
     datasets: [
       {
         label: "Sales and Partial Payment",
-        data: lastSevenDays.map((day) => day.amount),
+        data: lastDays.map((day) => day.amount),
         borderColor: "var(--primary-color)",
         backgroundColor: "rgba(67, 97, 238, 0.1)",
         borderWidth: 3,

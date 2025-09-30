@@ -5,11 +5,10 @@ import "./inventoryAlerts.scss";
 
 interface InventoryAlertsProps {
   alerts: InventoryAlert[];
-  loading: boolean;
   onMarkAsRead: (id: string) => void;
 }
 
-const InventoryAlerts: React.FC<InventoryAlertsProps> = ({ alerts, loading, onMarkAsRead }) => {
+const InventoryAlerts: React.FC<InventoryAlertsProps> = ({ alerts, onMarkAsRead }) => {
   const getAlertTypeColor = (type: string) => {
     switch (type) {
       case "low_stock": return "warning";
@@ -28,42 +27,52 @@ const InventoryAlerts: React.FC<InventoryAlertsProps> = ({ alerts, loading, onMa
     }
   };
 
+  if (alerts.length === 0) {
+    return (
+      <div className="empty-state">
+        <p>No inventory alerts found.</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="inventory-alerts">
-      <table className="modern-table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Alert Type</th>
-            <th>Current Stock</th>
-            <th>Reorder Level</th>
-            <th>Warehouse</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {alerts.map((alert) => (
-            <tr key={alert._id}>
-              <td>{alert.productName}</td>
-              <td>
-                <span className={`alert-badge alert-${getAlertTypeColor(alert.alertType)}`}>
-                  {getAlertTypeLabel(alert.alertType)}
-                </span>
-              </td>
-              <td>{alert.currentStock}</td>
-              <td>{alert.reorderLevel}</td>
-              <td>{alert.warehouseLocation}</td>
-              <td>
-                <Button 
-                  title="Mark as Read"
-                  className="modern-btn modern-btn-outline modern-btn-sm"
-                  onClick={() => onMarkAsRead(alert._id)}
-                />
-              </td>
+    <div className="inventory-alerts fade-in">
+      <div className="table-container">
+        <table className="modern-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Alert Type</th>
+              <th>Current Stock</th>
+              <th>Reorder Level</th>
+              <th>Warehouse</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {alerts.map((alert) => (
+              <tr key={alert._id}>
+                <td>{alert.productName}</td>
+                <td>
+                  <span className={`alert-badge alert-${getAlertTypeColor(alert.alertType)}`}>
+                    {getAlertTypeLabel(alert.alertType)}
+                  </span>
+                </td>
+                <td>{alert.currentStock}</td>
+                <td>{alert.reorderLevel}</td>
+                <td>{alert.warehouseLocation}</td>
+                <td>
+                  <Button 
+                    title="Mark as Read"
+                    className="modern-btn modern-btn-outline modern-btn-sm"
+                    onClick={() => onMarkAsRead(alert._id)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

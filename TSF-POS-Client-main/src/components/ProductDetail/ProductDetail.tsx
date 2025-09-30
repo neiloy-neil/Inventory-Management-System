@@ -17,6 +17,7 @@ const ProductDetail = ({
   useEffect(() => {
     let totalSaleOfProduct = 0;
     product.sales.map((sale) => {
+      // Match product by productId (number) since SaleItem.id is a number
       const matchedProduct = sale.items.find(
         (item) => item.id === product.productId
       );
@@ -93,6 +94,7 @@ const ProductDetail = ({
           </thead>
           <tbody>
             {product.sales.map((sale, key) => {
+              // Match product by productId (number) since SaleItem.id is a number
               const matchedProduct = sale.items.find(
                 (item) => item.id === product.productId
               );

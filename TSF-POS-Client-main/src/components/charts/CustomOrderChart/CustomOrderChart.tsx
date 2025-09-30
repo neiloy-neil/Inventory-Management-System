@@ -27,21 +27,26 @@ ChartJS.register(
   Legend
 );
 
-const CustomOrderChart = () => {
+interface CustomOrderChartProps {
+  timeRange?: string;
+}
+
+const CustomOrderChart = ({ timeRange = "7" }: CustomOrderChartProps) => {
   const [sales, setSales] = useState<CustomOrderFromServer[]>([]);
   const { branch } = useSelector((state: StateType) => state.dashboard);
 
   const fetchSales = useCallback(async () => {
-    const sevenDaysBefore = dayjs().subtract(6, "days").format("MM-DD-YYYY");
-    const today = dayjs().subtract(0, "days").format("MM-DD-YYYY");
+    const days = parseInt(timeRange);
+    const startDate = dayjs().subtract(days - 1, "days").format("MM-DD-YYYY");
+    const endDate = dayjs().subtract(0, "days").format("MM-DD-YYYY");
 
     const { data } = await client.get(
-      `/custom-order/list?branchId=${branch}&startDate=${sevenDaysBefore}&endDate=${today}`
+      `/custom-order/list?branchId=${branch}&startDate=${startDate}&endDate=${endDate}`
     );
 
     console.log(data, "data");
     setSales(data.orders);
-  }, [branch]);
+  }, [branch, timeRange]);
 
   useEffect(() => {
     fetchSales();
@@ -62,12 +67,31 @@ const CustomOrderChart = () => {
       },
       title: {
         display: true,
-        text: "Custom Order Performance (Last 7 Days)",
+        text: `Custom Order Performance (Last ${timeRange} Days)`,
         font: {
           size: 18,
           weight: "bold" as const,
         },
         padding: 20,
+      },
+      tooltip: {
+        mode: 'index' as const,
+        intersect: false,
+        callbacks: {
+          label: function(context: any) {
+            let label = context.dataset.label || '';
+            if (label) {
+              label += ': ';
+            }
+            if (context.parsed.y !== null) {
+              label += new Intl.NumberFormat('en-BD', {
+                style: 'currency',
+                currency: 'BDT'
+              }).format(context.parsed.y);
+            }
+            return label;
+          }
+        }
       },
     },
     scales: {
@@ -99,18 +123,34 @@ const CustomOrderChart = () => {
       intersect: false,
       mode: 'index' as const,
     },
+    onClick: (event: any, elements: any) => {
+      if (elements.length > 0) {
+        const firstElement = elements[0];
+        const dateIndex = firstElement.index;
+        // Could implement navigation to custom orders for specific date
+        console.log("Clicked on date index:", dateIndex);
+      }
+    },
   };
 
-  const lastSevenDays = [];
-  const dayNameLabels = [];
+  // Calculate date range based on timeRange
+  const days = parseInt(timeRange);
+  const lastDays = [];
+  const dayLabels = [];
 
-  for (let i = 7; i >= 0; i--) {
-    lastSevenDays.push({ date: moment().subtract(i, "days"), amount: 0 });
-    dayNameLabels.push(moment().subtract(i, "days").format("dddd"));
+  for (let i = days - 1; i >= 0; i--) {
+    lastDays.push({ date: moment().subtract(i, "days"), amount: 0 });
+    if (days <= 7) {
+      dayLabels.push(moment().subtract(i, "days").format("dddd"));
+    } else if (days <= 30) {
+      dayLabels.push(moment().subtract(i, "days").format("MMM DD"));
+    } else {
+      dayLabels.push(moment().subtract(i, "days").format("MMM DD"));
+    }
   }
 
-  // here iterating last 7days
-  lastSevenDays.forEach((day) => {
+  // here iterating last days
+  lastDays.forEach((day) => {
     // here iterating every sales
 
     sales?.forEach((sale) => {
@@ -141,11 +181,11 @@ const CustomOrderChart = () => {
   });
 
   const data = {
-    labels: dayNameLabels,
+    labels: dayLabels,
     datasets: [
       {
         label: "Advance Payment and Full Payment",
-        data: lastSevenDays.map((day) => day.amount),
+        data: lastDays.map((day) => day.amount),
         borderColor: "var(--accent-color)",
         backgroundColor: "rgba(76, 201, 240, 0.1)",
         borderWidth: 3,

@@ -39,16 +39,26 @@ const ProductCard = ({
     if (setEditingProduct) setEditingProduct(product);
   };
 
+  // Use product._id for navigation
+  const handleProductClick = () => {
+    // Navigate with the product's _id (MongoDB ObjectId)
+    console.log("Product object:", product);
+    console.log("Navigating to product detail with _id:", product._id);
+    console.log("Alternative productId:", product.productId);
+    // Try using _id first, which should work based on delete/edit patterns
+    navigate(`/product/${product._id}`);
+  };
+
   return (
     <Card className="modern-product-card modern-fade-in">
       <Card.Img
         className="modern-product-image"
         variant="top"
         src={`${product.photo}`}
-        onClick={() => navigate(`/product/${product.productId}`)}
+        onClick={handleProductClick}
       />
       <Card.Body className="modern-product-body">
-        <div onClick={() => navigate(`/product/${product.productId}`)}>
+        <div onClick={handleProductClick}>
           <Card.Title className="modern-product-title">{product.name}</Card.Title>
           <Card.Text className="modern-product-id">
             Id: <span className="fw-bold">{product.productId}</span>

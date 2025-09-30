@@ -19,6 +19,7 @@ import {
 import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk, SuccessMessageType } from "../../redux";
 import { ProductSuccess } from "./types";
+import { GetAllProductsResponse } from "../products/types";
 
 export const addProduct =
   (product: FormData): RootThunk =>
@@ -72,12 +73,49 @@ export const getProduct =
   async (dispatch: AppDispatch) => {
     try {
       dispatch({ type: GET_PRODUCT_PENDING });
-      const { data }: { data: ProductSuccess } = await client.get(
-        `/product/search?productId=${productId}`
-      );
-      if (data.success)
-        dispatch({ type: GET_PRODUCT_SUCCESS, payload: data.product });
-    } catch (error) {
+      
+      console.log("getProduct called with ID:", productId);
+      
+      // Since the action endpoint returns 404, we'll use the list endpoint approach
+      try {
+        console.log("Attempting to fetch all products and filter");
+        const { data }: { data: GetAllProductsResponse } = await client.get("/product/list");
+        
+        console.log("Product list response:", data);
+        
+        if (data.success) {
+          // Try to find the product by _id or productId
+          const foundProduct = data.products.find(
+            (product) => product._id === productId || product.productId.toString() === productId
+          );
+          
+          if (foundProduct) {
+            console.log("Found product in list:", foundProduct);
+            dispatch({ type: GET_PRODUCT_SUCCESS, payload: foundProduct });
+            return;
+          } else {
+            console.log("Product not found in list");
+            throw new Error("Product not found in product list");
+          }
+        } else {
+          throw new Error("Failed to fetch product list");
+        }
+      } catch (listError: any) {
+        console.log("Error fetching product list:", listError.response || listError);
+        
+        // Create a clear error message
+        let errorMessage = "Failed to load product details. ";
+        
+        if (listError.response) {
+          errorMessage += `Product list endpoint error: ${listError.response.status} - ${listError.response.statusText}. `;
+        } else {
+          errorMessage += "Unable to connect to the server. Please check if the backend is running.";
+        }
+        
+        errorDispatcher(new Error(errorMessage), GET_PRODUCT_ERROR, dispatch);
+      }
+    } catch (error: any) {
+      console.log("Unexpected error in getProduct:", error);
       errorDispatcher(error, GET_PRODUCT_ERROR, dispatch);
     }
   };

@@ -1,0 +1,57 @@
+.expenses-page {
+  padding: var(--spacing-lg);
+}
+
+.expenses-header {
+  margin-bottom: var(--spacing-lg);
+  
+  .expenses-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--gray-900);
+  }
+}
+
+.branch-selector-container {
+  max-width: 300px;
+}
+
+.expenses-grid {
+  .modern-card-body {
+    padding: 0;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .expenses-page {
+    padding: var(--spacing-md);
+  }
+  
+  .expenses-header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: stretch;
+    text-align: center;
+    
+    .expenses-title {
+      font-size: var(--font-size-xl);
+    }
+  }
+  
+  .branch-selector-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .expenses-page {
+    padding: var(--spacing-sm);
+  }
+  
+  .expenses-grid {
+    .modern-card-body {
+      padding: 0;
+    }
+  }
+}

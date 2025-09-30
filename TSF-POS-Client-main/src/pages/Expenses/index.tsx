@@ -11,6 +11,7 @@ import { expenseColumns } from "./expenseColumns";
 import moment from "moment";
 import AddExpense from "../../components/sections/Expenses/AddExpense/AddExpense";
 import { CLEAR_ERROR } from "../../constants/reduxActionsNames/user";
+import "./expenses.scss";
 
 const Expenses = () => {
   const { user } = useSelector((state: StateType) => state.user);
@@ -41,14 +42,29 @@ const Expenses = () => {
   });
 
   return (
-    <Pagewrapper>
-      {adminPermission && <BranchSelector setBranchId={setBranchId} />}
-      <AddExpense />
-      <DataGrid
-        columns={expenseColumns}
-        rows={row}
-        sx={{ height: "80vh", mt: 3 }}
-      />
+    <Pagewrapper title="Expense Management">
+      <div className="expenses-page">
+        <div className="expenses-header modern-flex modern-flex-between modern-mb-lg">
+          <h1 className="expenses-title modern-dashboard-title">Expense Management</h1>
+          <AddExpense />
+        </div>
+        
+        {adminPermission && (
+          <div className="branch-selector-container modern-mb-lg">
+            <BranchSelector setBranchId={setBranchId} />
+          </div>
+        )}
+        
+        <div className="expenses-grid modern-card">
+          <div className="modern-card-body">
+            <DataGrid
+              columns={expenseColumns}
+              rows={row}
+              sx={{ height: "70vh", mt: 3 }}
+            />
+          </div>
+        </div>
+      </div>
     </Pagewrapper>
   );
 };

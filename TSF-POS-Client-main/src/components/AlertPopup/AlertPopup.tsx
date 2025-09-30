@@ -4,11 +4,11 @@ import ModernAlert from "../Alert/ModernAlert/ModernAlert";
 
 interface AlertPopupProps {
   message: string;
-  type: "success" | "error" | "warning" | "info";
-  onClose: () => void;
+  type?: "success" | "error" | "warning" | "info";
+  onClose?: () => void;
 }
 
-const AlertPopup: React.FC<AlertPopupProps> = ({ message, type, onClose }) => {
+const AlertPopup: React.FC<AlertPopupProps> = ({ message, type = "info", onClose = () => {} }) => {
   return (
     <div className="alert-popup">
       <ModernAlert 

@@ -526,6 +526,8 @@ body {
   z-index: 1000;
   box-shadow: var(--shadow-lg);
   transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
 }
 
 .modern-sidebar-header {
@@ -540,8 +542,15 @@ body {
   display: block;
 }
 
+.modern-sidebar-nav-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .modern-sidebar-nav {
   padding: var(--spacing-lg) 0;
+  max-height: calc(100vh - 120px);
 }
 
 .modern-sidebar-link {
@@ -811,6 +820,10 @@ body {
     transform: translateX(0);
   }
   
+  .modern-sidebar-nav-container {
+    max-height: calc(100vh - 150px);
+  }
+  
   .modern-stats-grid {
     grid-template-columns: 1fr;
   }
@@ -829,5 +842,215 @@ body {
   
   .modern-stat-value {
     font-size: var(--font-size-xl);
+  }
+  
+  .modern-chart-container {
+    padding: var(--spacing-md);
+  }
+  
+  .modern-product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+  
+  .modern-product-card {
+    max-width: 100%;
+  }
+  
+  .modern-form-group {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .modern-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .modern-page-header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    text-align: center;
+  }
+  
+  .modern-page-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .modern-page-actions {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .modern-table-container {
+    overflow-x: auto;
+  }
+  
+  .modern-table {
+    min-width: 600px;
+  }
+}
+
+/* Additional responsive breakpoints */
+@media (max-width: 480px) {
+  :root {
+    --spacing-xs: 0.125rem;
+    --spacing-sm: 0.25rem;
+    --spacing-md: 0.5rem;
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
+    --spacing-2xl: 2rem;
+  }
+  
+  .modern-stats-grid {
+    gap: var(--spacing-md);
+  }
+  
+  .modern-stat-card {
+    padding: var(--spacing-md);
+  }
+  
+  .modern-stat-title {
+    font-size: var(--font-size-xs);
+  }
+  
+  .modern-stat-value {
+    font-size: var(--font-size-lg);
+  }
+  
+  .modern-chart-container {
+    padding: var(--spacing-sm);
+  }
+  
+  .modern-card-header {
+    padding: var(--spacing-md);
+  }
+  
+  .modern-card-body {
+    padding: var(--spacing-md);
+  }
+  
+  .modern-input {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+  
+  .modern-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* Large screen improvements */
+@media (min-width: 1200px) {
+  .modern-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .modern-product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+  .modern-btn {
+    padding: var(--spacing-md) var(--spacing-lg);
+    min-height: 44px; /* Minimum touch target size */
+  }
+  
+  .modern-sidebar-link {
+    padding: var(--spacing-md) var(--spacing-lg);
+    min-height: 48px;
+  }
+  
+  .modern-stat-card {
+    padding: var(--spacing-xl);
+  }
+  
+  .modern-product-card {
+    min-height: 350px;
+  }
+  
+  .modern-input {
+    padding: var(--spacing-md);
+    font-size: var(--font-size-lg);
+    min-height: 44px;
+  }
+  
+  .modern-sidebar-nav-container {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .modern-card {
+    transition: none; /* Disable hover effects on touch devices */
+  }
+  
+  .modern-sidebar-link:hover {
+    background: none;
+    transform: none;
+  }
+  
+  /* Larger touch targets for form elements */
+  .modern-checkbox-container,
+  .modern-radio-container {
+    padding: var(--spacing-sm);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Improved touch scrolling */
+  .modern-table-container {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Larger dropdown touch targets */
+  .modern-select {
+    min-height: 44px;
+    padding: var(--spacing-md);
+  }
+  
+  /* Improved touch feedback */
+  .modern-btn:active,
+  .modern-sidebar-link:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Focus visibility improvements for accessibility */
+.modern-btn:focus-visible,
+.modern-input:focus-visible,
+.modern-sidebar-link:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Prevent text selection on interactive elements */
+.modern-btn,
+.modern-sidebar-link {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Smooth scrolling for all scrollable elements */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduced motion support for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
   }
 }

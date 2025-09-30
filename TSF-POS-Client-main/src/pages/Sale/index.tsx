@@ -59,41 +59,67 @@ const Sale = () => {
     setValue("branch", branchId);
   }, [cart, setValue, branchId]);
 
+  // Handle successful sale - open invoice in new tab and reload sale page
+  useEffect(() => {
+    if (success && sale && sale._id) {
+      // Open invoice in new tab
+      window.open(`/invoice/${sale._id}`, '_blank');
+      
+      // Reload the sale page after a short delay
+      const timer = setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [success, sale]);
+
   const submitSale = async (data: object) => {
     await dispatch(addSale(data));
   };
 
   return (
     <Pagewrapper hideBar>
-      <div className="sale-page" style={{ height: "100vh" }}>
-        <div className="selector-side p-4">
+      <div className="sale-page modern-sale-page">
+        <div className="selector-side p-4 modern-selector-side">
           {!user.branch && <BranchSelector setBranchId={setBranchId} />}
-          <ProductSection />
+          <div className="modern-card">
+            <div className="modern-card-header">
+              <h2 className="modern-card-title">Products</h2>
+            </div>
+            <div className="modern-card-body">
+              <ProductSection />
+            </div>
+          </div>
         </div>
-        <div className="sale__info-side pt-3 p-4 ">
-          <h6 className="fs-5 fw-semibold">Create Order</h6>
-          {!branchId ? (
-            <AlertPopup message="Please Select A Branch First" />
-          ) : (
-            <>
-              {success ? (
-                <AlertPopup
-                  message="Sale Success"
-                  btnTitle="Print Invoice"
-                  type="success"
-                  onButtonClick={() => navigate(`/invoice/${sale._id}`)}
-                />
+        <div className="sale__info-side pt-3 p-4 modern-sale-info-side">
+          <div className="modern-card">
+            <div className="modern-card-header">
+              <h2 className="modern-card-title">Create Order</h2>
+            </div>
+            <div className="modern-card-body">
+              {!branchId ? (
+                <AlertPopup message="Please Select A Branch First" type="warning" />
               ) : (
-                <SaleInfo
-                  handleSubmit={handleSubmit}
-                  register={register}
-                  submitSale={submitSale}
-                  watch={watch}
-                  errors={errors}
-                />
+                <>
+                  {success ? (
+                    <AlertPopup
+                      message="Sale Success! Invoice opening in new tab..."
+                      type="success"
+                    />
+                  ) : (
+                    <SaleInfo
+                      handleSubmit={handleSubmit}
+                      register={register}
+                      submitSale={submitSale}
+                      watch={watch}
+                      errors={errors}
+                    />
+                  )}
+                </>
               )}
-            </>
-          )}
+            </div>
+          </div>
         </div>
       </div>
     </Pagewrapper>

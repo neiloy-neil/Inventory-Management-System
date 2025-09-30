@@ -21,6 +21,7 @@ import TransferStock from "../pages/TransferStock";
 import Users from "../pages/Users";
 import Customers from "../pages/Customers";
 import Inventory from "../pages/Inventory";
+import Reports from "../pages/Reports";
 
 // types of route object
 import { Route } from "./types";
@@ -131,6 +132,11 @@ const routes: Route[] = [
   {
     path: "/logout",
     component: Logout,
+    secured: true,
+  },
+  {
+    path: "/reports",
+    component: Reports,
     secured: true,
   },
 ];

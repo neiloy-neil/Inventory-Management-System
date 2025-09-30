@@ -43,26 +43,42 @@ const Branches = () => {
   }, [error, message, dispatch]);
 
   return (
-    <Pagewrapper>
-      <Button
-        title="Add Branch"
-        className="mb-4"
-        onClick={() => setAddBranchModalOpen(true)}
-      />
-      <FormModal
-        loading={loading}
-        title="Add Branch"
-        fields={BRANCH_FIELDS}
-        errors={errors}
-        open={addBranchModalOpen}
-        setOpen={setAddBranchModalOpen}
-        register={register}
-        submitFields={handleSubmit(onAddBranchSubmit)}
-      />
-      <div className="branches">
-        {branches?.map((branch, index) => {
-          return <BranchCard branch={branch} key={index} />;
-        })}
+    <Pagewrapper title="Branch Management">
+      <div className="branches-page">
+        <div className="branches-header modern-flex modern-flex-between modern-mb-lg">
+          <h1 className="branches-title modern-dashboard-title">Branch Management</h1>
+          <Button
+            title="Add Branch"
+            onClick={() => setAddBranchModalOpen(true)}
+            className="modern-btn modern-btn-primary"
+          />
+        </div>
+        
+        <FormModal
+          loading={loading}
+          title="Add Branch"
+          fields={BRANCH_FIELDS}
+          errors={errors}
+          open={addBranchModalOpen}
+          setOpen={setAddBranchModalOpen}
+          register={register}
+          submitFields={handleSubmit(onAddBranchSubmit)}
+        />
+        
+        <div className="branches-grid modern-grid modern-grid-cols-1 sm:modern-grid-cols-2 lg:modern-grid-cols-3 modern-gap-lg">
+          {branches?.map((branch, index) => {
+            return <BranchCard branch={branch} key={index} />;
+          })}
+        </div>
+        
+        {branches.length === 0 && (
+          <div className="no-branches modern-text-center modern-py-3xl">
+            <h3>No branches found</h3>
+            <p className="modern-text-base modern-text-gray-600 modern-mb-lg">
+              Get started by adding your first branch
+            </p>
+          </div>
+        )}
       </div>
     </Pagewrapper>
   );

@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
-    "@hookform/resolvers": "^3.1.0",
+    "@emotion/styled": "^11.14.1",
+    "@hookform/resolvers": "^3.10.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.18.0",
     "@mui/x-data-grid": "^6.5.0",
@@ -39,8 +39,9 @@
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
+    "vite-plugin-pwa": "^1.0.3",
     "yarn": "^1.22.19",
-    "yup": "^1.1.1"
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.16",

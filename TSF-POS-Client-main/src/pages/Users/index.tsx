@@ -9,7 +9,7 @@ import AppModal from "../../components/Modals/AppModal/AppModal";
 import { deleteUser } from "../../redux/actions/user/userAction";
 import { toast } from "react-hot-toast";
 import Adduser from "../../components/Adduser/Adduser";
-// import UserCard from "../../components/cards/UserCard/UserCard";
+import "./users.scss";
 
 const Users = () => {
   const { users, loading } = useSelector((state: StateType) => state.users);
@@ -34,41 +34,58 @@ const Users = () => {
   };
 
   return (
-    <Pagewrapper>
-      <Adduser />
-      <AppModal
-        loading={deletionLoading}
-        open={deletionModelOpen}
-        setOpen={setDeletionModelOpen}
-        handleConfirm={handleDeleteUser}
-        title="Confirm Deletion"
-        description="Do you want to delete this user"
-      />
-      {loading ? (
-        <div className="users__list d-flex gap-4 flex-wrap">
-          {[...Array(4)].map((_, index) => (
-            <Skeleton
-              variant="rectangular"
-              width={250}
-              height={150}
-              key={index}
-            />
-          ))}
+    <Pagewrapper title="User Management">
+      <div className="users-page">
+        <div className="users-header modern-flex modern-flex-between modern-mb-lg">
+          <h1 className="users-title modern-dashboard-title">User Management</h1>
+          <Adduser />
         </div>
-      ) : (
-        <div className="users__list d-flex gap-4 flex-wrap">
-          {users?.map((user, index) => {
-            return (
-              <UserCard
-                setDeletionModelOpen={setDeletionModelOpen}
-                setDeletingUserId={setDeletingUserId}
+        
+        <AppModal
+          loading={deletionLoading}
+          open={deletionModelOpen}
+          setOpen={setDeletionModelOpen}
+          handleConfirm={handleDeleteUser}
+          title="Confirm Deletion"
+          description="Do you want to delete this user"
+        />
+        
+        {loading ? (
+          <div className="users-grid modern-grid modern-grid-cols-1 sm:modern-grid-cols-2 lg:modern-grid-cols-3 modern-gap-lg">
+            {[...Array(6)].map((_, index) => (
+              <Skeleton
+                variant="rectangular"
+                width="100%"
+                height={200}
                 key={index}
-                user={user}
+                className="modern-card"
               />
-            );
-          })}
-        </div>
-      )}
+            ))}
+          </div>
+        ) : (
+          <div className="users-grid modern-grid modern-grid-cols-1 sm:modern-grid-cols-2 lg:modern-grid-cols-3 modern-gap-lg">
+            {users?.map((user, index) => {
+              return (
+                <UserCard
+                  setDeletionModelOpen={setDeletionModelOpen}
+                  setDeletingUserId={setDeletingUserId}
+                  key={index}
+                  user={user}
+                />
+              );
+            })}
+          </div>
+        )}
+        
+        {users.length === 0 && !loading && (
+          <div className="no-users modern-text-center modern-py-3xl">
+            <h3>No users found</h3>
+            <p className="modern-text-base modern-text-gray-600 modern-mb-lg">
+              Get started by adding your first user
+            </p>
+          </div>
+        )}
+      </div>
     </Pagewrapper>
   );
 };

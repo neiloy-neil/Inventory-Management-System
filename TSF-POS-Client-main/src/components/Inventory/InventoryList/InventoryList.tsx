@@ -5,12 +5,11 @@ import "./inventoryList.scss";
 
 interface InventoryListProps {
   items: InventoryItem[];
-  loading: boolean;
   onEdit: (item: InventoryItem) => void;
   onDelete: (id: string) => void;
 }
 
-const InventoryList: React.FC<InventoryListProps> = ({ items, loading, onEdit, onDelete }) => {
+const InventoryList: React.FC<InventoryListProps> = ({ items, onEdit, onDelete }) => {
   const getStatusClass = (quantity: number, reorderLevel: number) => {
     if (quantity === 0) return "status-danger";
     if (quantity <= reorderLevel) return "status-warning";
@@ -23,55 +22,65 @@ const InventoryList: React.FC<InventoryListProps> = ({ items, loading, onEdit, o
     return "In Stock";
   };
 
+  if (items.length === 0) {
+    return (
+      <div className="empty-state">
+        <p>No inventory items found.</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="inventory-list">
-      <table className="modern-table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>SKU</th>
-            <th>Batch</th>
-            <th>Expiry Date</th>
-            <th>Quantity</th>
-            <th>Warehouse</th>
-            <th>Reorder Level</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <tr key={item._id}>
-              <td>{item.productId}</td>
-              <td>{item.sku}</td>
-              <td>{item.batchNumber || "N/A"}</td>
-              <td>
-                {item.expiryDate ? new Date(item.expiryDate).toLocaleDateString() : "N/A"}
-              </td>
-              <td>{item.quantity}</td>
-              <td>{item.warehouseLocation || "N/A"}</td>
-              <td>{item.reorderLevel}</td>
-              <td>
-                <span className={`status-badge ${getStatusClass(item.quantity, item.reorderLevel)}`}>
-                  {getStatusLabel(item.quantity, item.reorderLevel)}
-                </span>
-              </td>
-              <td>
-                <Button 
-                  title="Edit"
-                  className="modern-btn modern-btn-outline modern-btn-sm me-2"
-                  onClick={() => onEdit(item)}
-                />
-                <Button 
-                  title="Delete"
-                  className="modern-btn modern-btn-danger modern-btn-sm"
-                  onClick={() => onDelete(item._id)}
-                />
-              </td>
+    <div className="inventory-list fade-in">
+      <div className="table-container">
+        <table className="modern-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>SKU</th>
+              <th>Batch</th>
+              <th>Expiry Date</th>
+              <th>Quantity</th>
+              <th>Warehouse</th>
+              <th>Reorder Level</th>
+              <th>Status</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <tr key={item._id}>
+                <td>{item.productId}</td>
+                <td>{item.sku}</td>
+                <td>{item.batchNumber || "N/A"}</td>
+                <td>
+                  {item.expiryDate ? new Date(item.expiryDate).toLocaleDateString() : "N/A"}
+                </td>
+                <td>{item.quantity}</td>
+                <td>{item.warehouseLocation || "N/A"}</td>
+                <td>{item.reorderLevel}</td>
+                <td>
+                  <span className={`status-badge ${getStatusClass(item.quantity, item.reorderLevel)}`}>
+                    {getStatusLabel(item.quantity, item.reorderLevel)}
+                  </span>
+                </td>
+                <td>
+                  <Button 
+                    title="Edit"
+                    className="modern-btn modern-btn-outline modern-btn-sm me-2"
+                    onClick={() => onEdit(item)}
+                  />
+                  <Button 
+                    title="Delete"
+                    className="modern-btn modern-btn-danger modern-btn-sm"
+                    onClick={() => onDelete(item._id)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

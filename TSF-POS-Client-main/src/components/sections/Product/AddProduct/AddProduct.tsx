@@ -38,7 +38,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="mb-4">
+    <div className="add-product-container">
       <FormModal
         loading={loading}
         errors={errors}
@@ -52,6 +52,7 @@ const AddProduct = () => {
       <Button
         title="Add Product"
         onClick={() => setAddProductModalOpen(true)}
+        className="modern-btn modern-btn-primary"
       />
     </div>
   );

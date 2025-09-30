@@ -12,6 +12,7 @@ import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import LogoutIcon from "@mui/icons-material/Logout";
 import PeopleIcon from "@mui/icons-material/People";
 import InventoryIcon from "@mui/icons-material/Inventory";
+import AssessmentIcon from "@mui/icons-material/Assessment";
 
 import { SidebarLinkType } from "./types";
 
@@ -48,6 +49,7 @@ const sidebarLinks: SidebarLinkType[] = [
   },
   { name: "Customers", icon: PeopleIcon, link: "/customers", adminOnlyPermission: true },
   { name: "Inventory", icon: InventoryIcon, link: "/inventory", adminOnlyPermission: true },
+  { name: "Reports", icon: AssessmentIcon, link: "/reports", adminOnlyPermission: true },
   { name: "Users", icon: GroupIcon, link: "/users", adminOnlyPermission: true },
   { name: "Logout", icon: LogoutIcon, link: "/logout" },
 ];

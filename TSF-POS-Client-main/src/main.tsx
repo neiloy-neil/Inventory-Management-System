@@ -10,6 +10,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./index.css";
+import "./global.scss";
+import "./modern-ui.css";
+import "./components/core/utils.scss";
 // import PaymentDue from "./pages/PaymentDue/PaymentDue.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

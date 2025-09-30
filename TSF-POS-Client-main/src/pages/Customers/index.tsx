@@ -20,9 +20,8 @@ const Customers: React.FC = () => {
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [customerToEdit, setCustomerToEdit] = useState<(CustomerFormData & { _id: string }) | null>(null);
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
-  const [deletingCustomerId, setDeletingCustomerId] = useState<string | null>(null);
   
-  const { loading: deletionLoading, message, error: deletionError } = useSelector(
+  const { message, error: deletionError } = useSelector(
     (state: StateType) => state.promise
   );
 
@@ -85,13 +84,10 @@ const Customers: React.FC = () => {
   const handleDeleteCustomer = async (customerId: string) => {
     if (window.confirm("Are you sure you want to delete this customer?")) {
       try {
-        setDeletingCustomerId(customerId);
         await dispatch(deleteCustomer(customerId));
         toast.success("Customer deleted successfully!");
       } catch (error) {
         toast.error("Failed to delete customer");
-      } finally {
-        setDeletingCustomerId(null);
       }
     }
   };

@@ -2,6 +2,7 @@ import BranchSelector from "../../Branch/BranchSelector/BranchSelector";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StateType } from "../../../../redux/redux";
@@ -42,27 +43,31 @@ const DashboardBranchAndDatePicker = () => {
         <div>
           <p className="mb-2">From Date:</p>
           <DatePicker
-            value={dayjs(fromDate)}
-            onChange={(e) =>
-              dispatch({
-                type: CHANGE_FROM_DATE,
-                payload: dayjs(e),
-              })
-            }
-            format="DD-MM-YYYY"
+            value={fromDate ? dayjs(fromDate) : null}
+            onChange={(newValue) => {
+              if (newValue) {
+                dispatch({
+                  type: CHANGE_FROM_DATE,
+                  payload: newValue.format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+                });
+              }
+            }}
+            renderInput={(params) => <TextField {...params} />}
           />
         </div>
-        <div>
+        <div className="ms-3">
           <p className="mb-2">To Date</p>
           <DatePicker
-            value={dayjs(toDate)}
-            onChange={(e) =>
-              dispatch({
-                type: CHANGE_TO_DATE,
-                payload: dayjs(e),
-              })
-            }
-            format="DD-MM-YYYY"
+            value={toDate ? dayjs(toDate) : null}
+            onChange={(newValue) => {
+              if (newValue) {
+                dispatch({
+                  type: CHANGE_TO_DATE,
+                  payload: newValue.format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+                });
+              }
+            }}
+            renderInput={(params) => <TextField {...params} />}
           />
         </div>
       </LocalizationProvider>

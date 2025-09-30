@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "../../core/Button/Button";
-import { Customer, PurchaseHistory, LoyaltyPointsTransaction } from "../../../types/Customer/customerTypes";
+import { Customer, PurchaseHistory } from "../../../types/Customer/customerTypes";
 import { fetchCustomerPurchaseHistory } from "../../../redux/actions/customers/customersAction";
 import { AppDispatch } from "../../../redux/redux";
 import { useDispatch } from "react-redux";

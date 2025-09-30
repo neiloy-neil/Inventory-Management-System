@@ -1,0 +1,119 @@
+.dashboard-controls {
+  margin-bottom: var(--spacing-lg);
+}
+
+.dashboard-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.dashboard-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.dashboard-section-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+// Chart section styles
+.chart-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chart-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.chart-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+// Stats card interactive styles
+.modern-stat-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid var(--gray-200) !important;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    border-color: var(--primary-color) !important;
+  }
+}
+
+.modern-stat-title {
+  font-weight: 500 !important;
+  color: var(--gray-600) !important;
+}
+
+.modern-stat-value {
+  font-weight: 700 !important;
+  color: var(--gray-900) !important;
+  margin-top: 8px !important;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .dashboard-controls {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .dashboard-section {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .dashboard-section-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    text-align: center;
+  }
+  
+  .dashboard-section-title {
+    font-size: var(--font-size-lg);
+  }
+  
+  .chart-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .chart-controls {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .chart-controls .MuiFormControl-root,
+  .chart-controls .MuiButton-root {
+    width: 100%;
+  }
+}
