@@ -1,0 +1,120 @@
+.customer-card {
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.customer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.customer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.customer-info {
+  flex: 1;
+}
+
+.customer-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--gray-900);
+}
+
+.customer-email {
+  font-size: 0.875rem;
+}
+
+.customer-segment-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+}
+
+.customer-details {
+  margin-bottom: 20px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+}
+
+.detail-label {
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+.detail-value {
+  color: var(--gray-800);
+  font-weight: 500;
+}
+
+.detail-value.points {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.detail-value.total-spent {
+  color: var(--success-color);
+  font-weight: 700;
+}
+
+.customer-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.customer-actions .modern-btn {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+}
+
+// Responsive improvements
+@media (max-width: 768px) {
+  .customer-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .customer-name {
+    font-size: 1.1rem;
+  }
+  
+  .detail-row {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .customer-card .card-body {
+    padding: 15px;
+  }
+  
+  .customer-name {
+    font-size: 1rem;
+  }
+  
+  .customer-actions {
+    flex-direction: column;
+  }
+  
+  .customer-actions .modern-btn {
+    width: 100%;
+  }
+}

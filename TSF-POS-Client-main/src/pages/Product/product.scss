@@ -1,0 +1,15 @@
+.product__image {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.product__details {
+  p {
+    margin-bottom: 10px;
+  }
+}
+
+.badge {
+  font-size: 14px !important;
+}

@@ -1,0 +1,88 @@
+.modern-alert {
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid transparent;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.modern-alert-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.modern-alert-icon {
+  font-weight: bold;
+  font-size: 18px;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modern-alert-message {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.modern-alert-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.modern-alert-close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modern-alert-success {
+  background-color: rgba(74, 222, 128, 0.15);
+  border-color: var(--success-color);
+  color: #166534;
+}
+
+.modern-alert-success .modern-alert-icon {
+  color: var(--success-color);
+}
+
+.modern-alert-error {
+  background-color: rgba(248, 113, 113, 0.15);
+  border-color: var(--danger-color);
+  color: #991b1b;
+}
+
+.modern-alert-error .modern-alert-icon {
+  color: var(--danger-color);
+}
+
+.modern-alert-warning {
+  background-color: rgba(250, 204, 21, 0.15);
+  border-color: var(--warning-color);
+  color: #854d0e;
+}
+
+.modern-alert-warning .modern-alert-icon {
+  color: var(--warning-color);
+}
+
+.modern-alert-info {
+  background-color: rgba(96, 165, 250, 0.15);
+  border-color: var(--info-color);
+  color: #1e40af;
+}
+
+.modern-alert-info .modern-alert-icon {
+  color: var(--info-color);
+}

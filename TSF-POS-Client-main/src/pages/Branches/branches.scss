@@ -1,0 +1,23 @@
+.branches {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(4, 23%);
+}
+
+@media (max-width: 1200px) {
+  .branches {
+    grid-template-columns: repeat(3, 32%);
+  }
+}
+
+@media (max-width: 900px) {
+  .branches {
+    grid-template-columns: repeat(2, 48%);
+  }
+}
+
+@media (max-width: 768px) {
+  .branches {
+    grid-template-columns: repeat(1, 100%);
+  }
+}

@@ -1,0 +1,19 @@
+.user__card {
+  .title {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  .role {
+    font-size: 14px;
+  }
+  .manage {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .user__card {
+    width: 100%;
+  }
+}

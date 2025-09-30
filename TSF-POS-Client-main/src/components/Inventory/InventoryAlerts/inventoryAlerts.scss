@@ -1,0 +1,61 @@
+.inventory-alerts {
+  .alert-list {
+    margin-top: 1rem;
+  }
+  
+  .alert-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+  }
+  
+  .alert-content {
+    flex: 1;
+  }
+  
+  .alert-title {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+  }
+  
+  .alert-details {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .alert-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    background-color: #e9ecef;
+    color: #495057;
+  }
+  
+  .alert-warning {
+    border-color: #ffc107;
+    background-color: #fff3cd;
+  }
+  
+  .alert-danger {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+  }
+  
+  .alert-info {
+    border-color: #17a2b8;
+    background-color: #d1ecf1;
+  }
+  
+  .alert-secondary {
+    border-color: #6c757d;
+    background-color: #e2e3e5;
+  }
+}

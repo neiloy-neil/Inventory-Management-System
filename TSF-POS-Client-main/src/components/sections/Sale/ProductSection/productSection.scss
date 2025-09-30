@@ -1,0 +1,25 @@
+.sale-product__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 180px));
+  gap: 20px;
+}
+
+.product__section {
+  height: 88vh;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sale-product__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .sale-product__list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,19 @@
+.core__inputField {
+  height: 40px;
+  font-size: 14px !important;
+}
+
+.top__label {
+  font-size: 12px;
+}
+
+.input__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.error__message {
+  margin-top: 5px;
+  font-size: 12px;
+  color: red;
+}

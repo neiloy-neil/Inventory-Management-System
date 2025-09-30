@@ -1,0 +1,24 @@
+.inventory-list {
+  .status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  
+  .status-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .status-warning {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+}

@@ -1,0 +1,219 @@
+.customers-page {
+  padding: 20px 0;
+}
+
+.customers-header {
+  margin-bottom: 30px;
+  
+  .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gray-900);
+  }
+}
+
+.customers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.customers-loading {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.customers-error {
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.no-customers {
+  text-align: center;
+  padding: 60px 20px;
+  
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--gray-900);
+  }
+  
+  p {
+    color: var(--gray-600);
+    margin-bottom: 30px;
+  }
+}
+
+.customer-form-grid {
+  .modern-form-group {
+    margin-bottom: 20px;
+  }
+}
+
+.segment-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.points {
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.total-spent {
+  color: var(--success-color);
+  font-weight: 700;
+}
+
+.info-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  margin-bottom: 5px;
+}
+
+.info-value {
+  font-size: 1rem;
+  color: var(--gray-800);
+  margin-bottom: 15px;
+}
+
+.consent-yes {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.consent-no {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  
+  th {
+    font-weight: 600;
+    color: var(--gray-700);
+    background-color: var(--gray-100);
+  }
+  
+  tr:hover {
+    background-color: var(--gray-50);
+  }
+}
+
+.points-earned {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.points-redeemed {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+.transaction-type {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.transaction-type.earned {
+  background-color: rgba(74, 222, 128, 0.2);
+  color: #166534;
+}
+
+.transaction-type.redeemed {
+  background-color: rgba(248, 113, 113, 0.2);
+  color: #991b1b;
+}
+
+.loyalty-summary {
+  padding: 20px;
+  background-color: var(--gray-100);
+  border-radius: 8px;
+  
+  .loyalty-balance, .loyalty-tier {
+    text-align: center;
+    
+    h6 {
+      font-size: 0.875rem;
+      color: var(--gray-600);
+      margin-bottom: 5px;
+    }
+    
+    .points-balance {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-color);
+    }
+    
+    .tier-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      text-transform: capitalize;
+    }
+  }
+}
+
+.no-data {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--gray-500);
+}
+
+// Responsive improvements
+@media (max-width: 768px) {
+  .customers-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+    
+    .page-title {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .customers-grid, .customers-loading {
+    grid-template-columns: 1fr;
+  }
+  
+  .loyalty-summary {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .customers-page {
+    padding: 10px 0;
+  }
+  
+  .info-group {
+    margin-bottom: 15px;
+  }
+  
+  .modern-table {
+    font-size: 0.875rem;
+    
+    th, td {
+      padding: 8px 10px;
+    }
+  }
+}

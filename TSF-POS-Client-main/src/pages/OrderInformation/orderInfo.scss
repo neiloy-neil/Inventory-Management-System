@@ -1,0 +1,15 @@
+.card-header {
+  background-color: #1876d1 !important;
+  color: white !important;
+}
+
+.orderStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 300px;
+}
+
+.productSelector {
+  width: 350px;
+}

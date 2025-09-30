@@ -1,0 +1,6 @@
+@media (max-width: 768px) {
+  .branch__header {
+    display: grid !important;
+    grid-template-columns: 1fr;
+  }
+}

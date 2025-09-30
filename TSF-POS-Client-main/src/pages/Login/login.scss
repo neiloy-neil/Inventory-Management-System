@@ -1,0 +1,16 @@
+.login {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  gap: 50px 0px;
+}
+
+.forgot__password {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+// The modern login styles are now in modern-ui.css
+// This file can be kept for any legacy styles that might still be in use

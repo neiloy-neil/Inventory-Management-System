@@ -1,0 +1,37 @@
+.warehouse-locations {
+  .utilization-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .utilization-progress {
+    flex: 1;
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .utilization-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+  
+  .utilization-text {
+    font-size: 0.8rem;
+    font-weight: 500;
+    min-width: 35px;
+    text-align: right;
+  }
+  
+  .unlimited-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background-color: #17a2b8;
+    color: white;
+  }
+}

@@ -1,0 +1,12 @@
+.payment__due-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  .image {
+    height: 300px;
+    object-fit: contain;
+  }
+}

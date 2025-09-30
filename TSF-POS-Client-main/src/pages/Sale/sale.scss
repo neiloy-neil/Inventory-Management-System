@@ -1,0 +1,33 @@
+.sale-page {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-auto-flow: row; /* Enable wrapping */
+  height: 80vh;
+}
+
+.sale__info-side {
+  background-color: #f5f5f6;
+}
+
+.selector-side {
+  height: 100vh;
+}
+
+.sale__info-side {
+  .sale__info {
+    overflow: scroll;
+  }
+}
+
+@media (max-width: 768px) {
+  .sale-page {
+    grid-template-columns: 1fr;
+  }
+  .selector-side {
+    order: 2; /* Place the selector-side grid item as the second item */
+  }
+
+  .sale__info-side {
+    order: 1; /* Place the info-side grid item as the first item */
+  }
+}
