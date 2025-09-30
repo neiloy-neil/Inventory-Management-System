@@ -1,0 +1,45 @@
+// Dashboard Branch and Date Picker Styles
+.dashboard-controls {
+  margin-bottom: var(--spacing-lg);
+  background: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-lg);
+}
+
+.dashboard-controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.dashboard-controls-title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.dashboard-controls-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  align-items: end;
+}
+
+.dashboard-controls-item {
+  flex: 1;
+  min-width: 200px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-controls-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .dashboard-controls-item {
+    min-width: 100%;
+  }
+}
