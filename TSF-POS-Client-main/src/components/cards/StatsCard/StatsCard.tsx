@@ -1,5 +1,6 @@
 import { Box, CardContent, Typography } from "@mui/material";
 import React from "react";
+import "./stats-card.scss";
 
 interface StatsCardProps {
   title: string;

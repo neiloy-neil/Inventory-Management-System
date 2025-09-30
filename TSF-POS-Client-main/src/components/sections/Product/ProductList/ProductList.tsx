@@ -10,7 +10,6 @@ import "./productList.scss";
 import EditProduct from "../EditProduct/EditProduct";
 import ProductListView from "../ProductListView/ProductListView";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
-import Button from "../../../core/Button/Button";
 
 const ProductList = ({ products }: { products: Product[] }) => {
   const { loading } = useSelector((state: StateType) => state.product);
