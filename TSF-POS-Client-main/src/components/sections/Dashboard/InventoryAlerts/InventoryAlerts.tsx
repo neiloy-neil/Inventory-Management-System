@@ -1,14 +1,23 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, StateType } from "../../../../redux/redux";
 import { fetchInventoryAlerts } from "../../../../redux/actions/inventory/inventoryActions";
-import { Card, CardContent, Typography, List, ListItem, ListItemText, Chip, Button } from "@mui/material";
+import { StateType } from "../../../../redux/redux";
+import "./inventory-alerts.scss";
+import {
+  Card,
+  CardContent,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Chip,
+  Button,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 
 const InventoryAlerts: React.FC = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: any = useDispatch();
   const { alerts } = useSelector((state: StateType) => state.inventory);
-  // const { alerts, loading } = useSelector((state: StateType) => state.inventory); // Commented out unused loading variable
 
   useEffect(() => {
     dispatch(fetchInventoryAlerts());
@@ -60,7 +69,7 @@ const InventoryAlerts: React.FC = () => {
                   <>
                     <Chip 
                       label={getAlertTypeLabel(alert.alertType)} 
-                      color={getAlertTypeColor(alert.alertType)} 
+                      color={getAlertTypeColor(alert.alertType) as any} 
                       size="small" 
                       sx={{ mr: 1 }}
                     />

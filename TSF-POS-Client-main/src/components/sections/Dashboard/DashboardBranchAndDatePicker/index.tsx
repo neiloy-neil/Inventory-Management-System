@@ -1,7 +1,4 @@
 import BranchSelector from "../../Branch/BranchSelector/BranchSelector";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +8,10 @@ import {
   CHANGE_FROM_DATE,
   CHANGE_TO_DATE,
 } from "../../../../constants/reduxActionsNames/dashboard";
-import dayjs from "dayjs";
+import "./dashboard-branch-and-date-picker.scss";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs, { Dayjs } from "dayjs";
 import useAdminPermission from "../../../../hooks/permission/useAdminPermission";
 
 const DashboardBranchAndDatePicker = () => {
@@ -39,12 +39,12 @@ const DashboardBranchAndDatePicker = () => {
         </div>
       )}
 
-      <LocalizationProvider dateAdapter={AdapterMoment}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div>
           <p className="mb-2">From Date:</p>
           <DatePicker
             value={fromDate ? dayjs(fromDate) : null}
-            onChange={(newValue) => {
+            onChange={(newValue: Dayjs | null) => {
               if (newValue) {
                 dispatch({
                   type: CHANGE_FROM_DATE,
@@ -52,14 +52,14 @@ const DashboardBranchAndDatePicker = () => {
                 });
               }
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => <TextField {...params} size="small" />}
           />
         </div>
         <div className="ms-3">
           <p className="mb-2">To Date</p>
           <DatePicker
             value={toDate ? dayjs(toDate) : null}
-            onChange={(newValue) => {
+            onChange={(newValue: Dayjs | null) => {
               if (newValue) {
                 dispatch({
                   type: CHANGE_TO_DATE,
@@ -67,7 +67,7 @@ const DashboardBranchAndDatePicker = () => {
                 });
               }
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => <TextField {...params} size="small" />}
           />
         </div>
       </LocalizationProvider>

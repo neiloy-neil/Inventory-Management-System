@@ -2,7 +2,7 @@ import CustomOrderChart from "../../../charts/CustomOrderChart/CustomOrderChart"
 import SaleChart from "../../../charts/SaleChart/SaleChart";
 import "./dash-charts.scss";
 import { useState } from "react";
-import { FormControl, InputLabel, Select, MenuItem, Box, Button } from "@mui/material";
+import { FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const DashCharts = () => {
