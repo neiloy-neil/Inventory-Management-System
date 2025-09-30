@@ -18,7 +18,6 @@ import {
 } from "../../../constants/reduxActionsNames/product";
 import errorDispatcher from "../../dispatcher/errorDispatcher";
 import { AppDispatch, RootThunk, SuccessMessageType } from "../../redux";
-import { ProductSuccess } from "./types";
 import { GetAllProductsResponse } from "../products/types";
 
 export const addProduct =

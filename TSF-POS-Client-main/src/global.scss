@@ -111,39 +111,6 @@
   margin-bottom: var(--spacing-xl);
 }
 
-// Interactive stat card
-.modern-stat-card {
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  border: 1px solid var(--gray-200) !important;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg) !important;
-    border-color: var(--primary-color) !important;
-  }
-}
-
-.modern-stat-card-content {
-  transition: all var(--transition-normal);
-  
-  &:hover {
-    transform: translateY(-2px);
-  }
-}
-
-.modern-stat-title {
-  font-weight: 500 !important;
-  color: var(--gray-600) !important;
-}
-
-.modern-stat-value {
-  font-weight: 700 !important;
-  color: var(--gray-900) !important;
-  margin-top: 8px !important;
-  font-size: 1.5rem !important;
-}
-
 // Dashboard specific styles
 .modern-dashboard-header {
   display: flex;
